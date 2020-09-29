@@ -6,7 +6,7 @@ const Hello: React.FunctionComponent<{
 	compiler: string
 	framework: string
 }> = props => {
-	// console.log(props.compiler, props.framework)
+	console.log(props.compiler, props.framework)
 	return (
 		<div>
 			{/* <div>{props.compiler}</div>
