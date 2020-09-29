@@ -1,7 +1,6 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
-import Freudling from "./components/Freudling"
-import Charlie from "./components/Charlie"
+import BalanceBook from "./containers/BalanceBook/BalanceBook"
 
 const Hello: React.FunctionComponent<{
 	compiler: string
@@ -10,21 +9,9 @@ const Hello: React.FunctionComponent<{
 	// console.log(props.compiler, props.framework)
 	return (
 		<div>
-			<div>{props.compiler}</div>
-			<div>{props.framework}</div>
-			<Freudling name='Charles Altman III' age={23} isFreud={false} />
-			<Charlie
-				name='Charlie Charlie'
-				age={24}
-				isFreud={false}
-				isACharlie={true}
-			/>
-			<Charlie
-				name='Yannick Nandury'
-				age={1000}
-				isFreud={true}
-				isACharlie={false}
-			/>
+			{/* <div>{props.compiler}</div>
+			<div>{props.framework}</div> */}
+			<BalanceBook />
 		</div>
 	)
 }

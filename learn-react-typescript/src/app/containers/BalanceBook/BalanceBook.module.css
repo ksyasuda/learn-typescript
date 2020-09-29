@@ -1,0 +1,12 @@
+.title {
+	color: dodgerblue;
+	text-align: center;
+	font-weight: bold;
+}
+
+.CurrentBalance {
+	text-align: center;
+	font-weight: bold;
+	color: green;
+	font-size: 18px;
+}

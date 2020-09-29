@@ -1,0 +1,30 @@
+.Container {
+	display: flex;
+	border-radius: 200px;
+	padding: 10px;
+	margin-top: 10px;
+	width: 90%;
+	position: relative;
+	left: 5%;
+}
+
+.TName {
+	float: left;
+	width: 90%;
+	position: relative;
+	font-weight: bold;
+	left: 5%;
+}
+
+.TNameText {
+	color: blue;
+}
+
+.TAmount {
+	float: right;
+	position: relative;
+	right: 5%;
+	font-size: normal;
+	white-space: nowrap;
+	font-weight: bold;
+}
