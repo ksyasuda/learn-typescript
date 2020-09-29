@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"sourceMap": true,
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		"target": "ESNEXT",
+		"jsx": "react",
+		"lib": ["dom", "es6"]
+	},
+	"include": ["src"],
+	"compileOnSave": false
+}
