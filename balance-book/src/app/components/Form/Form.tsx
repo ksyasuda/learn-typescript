@@ -6,20 +6,33 @@ type elementConfig = {
 	placeholder: string
 }
 
+// interface Props {
+// 	transactionAmount: Function
+// 	transactionName: Function
+// 	transactionType: Function
+// 	transactionDate: Function
+// 	elementType: Function
+// 	elementConfig: Function
+// }
+
 interface Props {
-	transactionAmount: Function
-	transactionName: Function
-	transactionType: Function
-	transactionDate: Function
-	elementType: Function
-	elementConfig: Function
+	changed: Function
+	value: number | string
+	type: string
+	placeholder?: string
+	name: string
 }
 
-const form: React.FunctionComponent<Props> = props => {
+const form: React.FunctionComponent<Props> = (props: Props) => {
+	const { changed, value, type, placeholder, name } = props
 	return (
-		<form>
-			<input type='text' value='' placeholder='name' />
-		</form>
+		<input
+			type={type}
+			value={value}
+			placeholder={placeholder}
+			name={name}
+			onChange={event => changed(event)}
+		/>
 	)
 }
 
