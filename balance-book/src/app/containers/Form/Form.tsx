@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Component } from "react"
 import { FunctionExpression } from "typescript"
 
 type elementConfig = {
@@ -15,7 +15,7 @@ type elementConfig = {
 // 	elementConfig: Function
 // }
 
-interface Props {
+interface State {
 	changed: Function
 	value: number | string
 	type: string
@@ -24,17 +24,19 @@ interface Props {
 	options?: Array<Object>
 }
 
-const form: React.FunctionComponent<Props> = (props: Props) => {
-	const { changed, value, type, placeholder, name } = props
-	return (
-		<input
-			type={type}
-			value={value}
-			placeholder={placeholder}
-			name={name}
-			onChange={event => changed(event)}
-		/>
-	)
+class Form extends Component<{}, State> {
+	render() {
+		return (
+			// <input
+			// 	type={type}
+			// 	value={value}
+			// 	placeholder={placeholder}
+			// 	name={name}
+			// 	onChange={event => changed(event)}
+			// />
+			<h1>nice</h1>
+		)
+	}
 }
 
-export default form
+export default Form

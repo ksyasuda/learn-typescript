@@ -1,6 +1,6 @@
-import React, { Component, FormHTMLAttributes } from "react"
+import React, { ChangeEvent, Component, FormHTMLAttributes } from "react"
 import Transaction from "../../components/Transaction/Transaction"
-import Form from "../../components/Form/Form"
+import Form from "../Form/Form"
 import classes from "./BalanceBook.module.css"
 import transaction from "../../components/Transaction/Transaction"
 
@@ -11,22 +11,31 @@ type ElementConfig = {
 		name: string
 	}
 }
+
+type ElementSelect = {
+	elementType: string
+	elementConfig: {
+		placeholder: string
+		name: string
+		options: Array<Object>
+	}
+}
 interface State {
 	initialBalance: number
 	currentBalance: number
-	transactionAmount: string
+	transactionAmount: number
 	transactionName: string
 	transactionType: string
 	transactionDate: string
 	formData: any
-	form: any
+	form: JSX.Element[]
 }
 
 export default class BalanceBook extends Component<{}, State> {
 	state: State = {
 		initialBalance: 7442.38,
 		currentBalance: 7442.38,
-		transactionAmount: "",
+		transactionAmount: 0,
 		transactionName: "",
 		transactionType: "",
 		transactionDate: "",
@@ -79,7 +88,9 @@ export default class BalanceBook extends Component<{}, State> {
 									type={elt.elementType}
 									placeholder={elt.elementConfig.placeholder}
 									name={elt.elementConfig.name}
-									changed={event => this.handleChange(event)}
+									changed={(
+										event: ChangeEvent<HTMLInputElement>
+									) => this.handleChange(event)}
 								/>
 							)
 							formarr.push(name)
@@ -93,7 +104,9 @@ export default class BalanceBook extends Component<{}, State> {
 									type={elt.elementType}
 									placeholder={elt.elementConfig.placeholder}
 									name={elt.elementConfig.name}
-									changed={event => this.handleChange(event)}
+									changed={(
+										event: ChangeEvent<HTMLInputElement>
+									) => this.handleChange(event)}
 								/>
 							)
 							formarr.push(num)
@@ -106,7 +119,9 @@ export default class BalanceBook extends Component<{}, State> {
 									value={this.state.transactionAmount}
 									type={elt.elementType}
 									name={elt.elementConfig.name}
-									changed={event => this.handleChange(event)}
+									changed={(
+										event: ChangeEvent<HTMLInputElement>
+									) => this.handleChange(event)}
 									options={elt.elementConfig.options}
 								/>
 							)
@@ -121,7 +136,9 @@ export default class BalanceBook extends Component<{}, State> {
 									type={elt.elementType}
 									placeholder={elt.elementConfig.placeholder}
 									name={elt.elementConfig.name}
-									changed={event => this.handleChange(event)}
+									changed={(
+										event: ChangeEvent<HTMLInputElement>
+									) => this.handleChange(event)}
 								/>
 							)
 							formarr.push(date)
