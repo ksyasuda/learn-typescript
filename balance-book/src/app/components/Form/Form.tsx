@@ -21,6 +21,7 @@ interface Props {
 	type: string
 	placeholder?: string
 	name: string
+	options?: Array<Object>
 }
 
 const form: React.FunctionComponent<Props> = (props: Props) => {
