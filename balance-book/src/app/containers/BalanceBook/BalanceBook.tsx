@@ -58,10 +58,6 @@ export default class BalanceBook extends Component<{}, State> {
 				elementType: "select",
 				elementConfig: {
 					name: "Transaction Type",
-					options: {
-						add: { value: "+" },
-						sub: { value: "-", selected: true },
-					},
 				},
 			},
 			{
@@ -70,15 +66,44 @@ export default class BalanceBook extends Component<{}, State> {
 					name: "Transaction Date",
 				},
 			},
+			{
+				elementType: "submit",
+			},
 		],
 		form: null,
+	}
+
+	onSubmitHandler = () => {
+		console.log("submit!")
+		let name = document.getElementById("tname")
+		console.log("tname", name.getAttribute("value"))
+		let tempname = this.state.transactionName
+		tempname = ""
+		this.setState({ transactionName: tempname })
 	}
 
 	componentDidMount = () => {
 		let formarr: Array<JSX.Element> = []
 		let form = (
-			<form name='Transaction Form'>
+			<form
+				name='Transaction Form'
+				id='form'
+				onSubmit={this.onSubmitHandler}
+			>
 				{this.state.formData.map(elt => {
+					if (elt.elementType === "submit") {
+						let formm = (
+							<Form
+								key={elt.elementType}
+								value={this.state.transactionName}
+								changed={this.onSubmitHandler}
+								elementType={elt.elementType}
+								elementConfig={elt.elementConfig}
+							/>
+						)
+						formarr.push(formm)
+						return formm
+					}
 					let formm = (
 						<Form
 							key={elt.elementType}
