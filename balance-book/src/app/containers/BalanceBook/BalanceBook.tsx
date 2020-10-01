@@ -14,7 +14,7 @@ type ElementConfig = {
 interface State {
 	initialBalance: number
 	currentBalance: number
-	transactionAmount: string
+	transactionAmount: number
 	transactionName: string
 	transactionType: string
 	transactionDate: string
@@ -26,7 +26,7 @@ export default class BalanceBook extends Component<{}, State> {
 	state: State = {
 		initialBalance: 7442.38,
 		currentBalance: 7442.38,
-		transactionAmount: "",
+		transactionAmount: 0,
 		transactionName: "",
 		transactionType: "",
 		transactionDate: "",
@@ -70,68 +70,67 @@ export default class BalanceBook extends Component<{}, State> {
 		let form = (
 			<form name='Transaction Form'>
 				{this.state.formData.map(elt => {
-					switch (elt.elementType) {
-						case "text":
-							const name = (
-								<Form
-									key={elt.elementType}
-									value={this.state.transactionName}
-									type={elt.elementType}
-									placeholder={elt.elementConfig.placeholder}
-									name={elt.elementConfig.name}
-									changed={event => this.handleChange(event)}
-								/>
-							)
-							formarr.push(name)
-							return name
-							break
-						case "number":
-							const num = (
-								<Form
-									key={elt.elementType}
-									value={this.state.transactionAmount}
-									type={elt.elementType}
-									placeholder={elt.elementConfig.placeholder}
-									name={elt.elementConfig.name}
-									changed={event => this.handleChange(event)}
-								/>
-							)
-							formarr.push(num)
-							return num
-							break
-						case "select":
-							const type = (
-								<Form
-									key={elt.elementType}
-									value={this.state.transactionAmount}
-									type={elt.elementType}
-									name={elt.elementConfig.name}
-									changed={event => this.handleChange(event)}
-									options={elt.elementConfig.options}
-								/>
-							)
-							formarr.push(type)
-							return type
-							break
-						case "date":
-							const date = (
-								<Form
-									key={elt.elementType}
-									value={this.state.transactionAmount}
-									type={elt.elementType}
-									placeholder={elt.elementConfig.placeholder}
-									name={elt.elementConfig.name}
-									changed={event => this.handleChange(event)}
-								/>
-							)
-							formarr.push(date)
-							return date
-							break
-						default:
-							throw new Error(
-								"Something went wrong with the names"
-							)
-					}
+					let formm = (
+						<Form
+							key={elt.elementType}
+							value={this.state.transactionName}
+							changed={event => this.handleChange(event)}
+							elementType={elt.elementType}
+							elementConfig={elt.elementConfig}
+						/>
+					)
+					formarr.push(formm)
+					return formm
+					// switch (elt.elementType) {
+					// 	case "text":
+					// 		const name = (
+					// 			<Form
+					// 				key={elt.elementType}
+					// 				value={this.state.transactionName}
+					// 				changed={event => this.handleChange(event)}
+					// 			/>
+					// 		)
+					// 		formarr.push(name)
+					// 		return name
+					// 		break
+					// 	case "number":
+					// 		const num = (
+					// 			<Form
+					// 				key={elt.elementType}
+					// 				value={this.state.transactionAmount}
+					// 				changed={event => this.handleChange(event)}
+					// 			/>
+					// 		)
+					// 		formarr.push(num)
+					// 		return num
+					// 		break
+					// 	case "select":
+					// 		const type = (
+					// 			<Form
+					// 				key={elt.elementType}
+					// 				value={this.state.transactionAmount}
+					// 				changed={event => this.handleChange(event)}
+					// 			/>
+					// 		)
+					// 		formarr.push(type)
+					// 		return type
+					// 		break
+					// 	case "date":
+					// 		const date = (
+					// 			<Form
+					// 				key={elt.elementType}
+					// 				value={this.state.transactionAmount}
+					// 				changed={event => this.handleChange(event)}
+					// 			/>
+					// 		)
+					// 		formarr.push(date)
+					// 		return date
+					// 		break
+					// 	default:
+					// 		throw new Error(
+					// 			"Something went wrong with the names"
+					// 		)
+					// }
 				})}
 			</form>
 		)

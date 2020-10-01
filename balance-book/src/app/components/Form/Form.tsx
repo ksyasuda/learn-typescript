@@ -1,5 +1,5 @@
 import React from "react"
-import { FunctionExpression } from "typescript"
+import { FunctionExpression, ObjectFlags } from "typescript"
 
 type elementConfig = {
 	name: string
@@ -18,23 +18,63 @@ type elementConfig = {
 interface Props {
 	changed: Function
 	value: number | string
-	type: string
-	placeholder?: string
-	name: string
-	options?: Array<Object>
+	elementType: Function
+	elementConfig: ObjectFlags
 }
 
 const form: React.FunctionComponent<Props> = (props: Props) => {
-	const { changed, value, type, placeholder, name } = props
-	return (
-		<input
-			type={type}
-			value={value}
-			placeholder={placeholder}
-			name={name}
-			onChange={event => changed(event)}
-		/>
-	)
+	const { changed, value } = props
+	// switch (elt.elementType) {
+	// 	case "text":
+	// 		const name = (
+	// 			<Form
+	// 				key={elt.elementType}
+	// 				value={this.state.transactionName}
+	// 				changed={event => this.handleChange(event)}
+	// 			/>
+	// 		)
+	// 		formarr.push(name)
+	// 		return name
+	// 		break
+	// 	case "number":
+	// 		const num = (
+	// 			<Form
+	// 				key={elt.elementType}
+	// 				value={this.state.transactionAmount}
+	// 				changed={event => this.handleChange(event)}
+	// 			/>
+	// 		)
+	// 		formarr.push(num)
+	// 		return num
+	// 		break
+	// 	case "select":
+	// 		const type = (
+	// 			<Form
+	// 				key={elt.elementType}
+	// 				value={this.state.transactionAmount}
+	// 				changed={event => this.handleChange(event)}
+	// 			/>
+	// 		)
+	// 		formarr.push(type)
+	// 		return type
+	// 		break
+	// 	case "date":
+	// 		const date = (
+	// 			<Form
+	// 				key={elt.elementType}
+	// 				value={this.state.transactionAmount}
+	// 				changed={event => this.handleChange(event)}
+	// 			/>
+	// 		)
+	// 		formarr.push(date)
+	// 		return date
+	// 		break
+	// 	default:
+	// 		throw new Error(
+	// 			"Something went wrong with the names"
+	// 		)
+	// }
+	return null
 }
 
 export default form
