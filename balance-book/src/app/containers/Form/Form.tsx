@@ -15,14 +15,14 @@ type elementConfig = {
 // 	elementConfig: Function
 // }
 
-interface Props {
+interface State {
 	changed: Function
 	value: number | string
 	elementType: Function
 	elementConfig: ObjectFlags
 }
 
-const form: React.FunctionComponent<Props> = (props: Props) => {
+const form: React.FunctionComponent<State> = (props: State) => {
 	const { changed, value } = props
 	// switch (elt.elementType) {
 	// 	case "text":

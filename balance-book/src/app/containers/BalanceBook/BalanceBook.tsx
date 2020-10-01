@@ -1,6 +1,6 @@
-import React, { Component, FormHTMLAttributes } from "react"
+import React, { ChangeEvent, Component, FormHTMLAttributes } from "react"
 import Transaction from "../../components/Transaction/Transaction"
-import Form from "../../components/Form/Form"
+import Form from "../Form/Form"
 import classes from "./BalanceBook.module.css"
 import transaction from "../../components/Transaction/Transaction"
 
@@ -11,6 +11,15 @@ type ElementConfig = {
 		name: string
 	}
 }
+
+type ElementSelect = {
+	elementType: string
+	elementConfig: {
+		placeholder: string
+		name: string
+		options: Array<Object>
+	}
+}
 interface State {
 	initialBalance: number
 	currentBalance: number
@@ -19,7 +28,7 @@ interface State {
 	transactionType: string
 	transactionDate: string
 	formData: any
-	form: any
+	form: JSX.Element[]
 }
 
 export default class BalanceBook extends Component<{}, State> {
