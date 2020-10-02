@@ -28,7 +28,7 @@ interface State {
 	transactionType: string
 	transactionDate: string
 	formData: any
-	form: JSX.Element[]
+	form: any
 }
 
 export default class BalanceBook extends Component<{}, State> {
@@ -73,7 +73,8 @@ export default class BalanceBook extends Component<{}, State> {
 		form: null,
 	}
 
-	onSubmitHandler = () => {
+	onSubmitHandler = (event) => {
+		event.preventDefault()
 		console.log("submit!")
 		let name = document.getElementById("tname")
 		console.log("tname", name.getAttribute("value"))
@@ -88,7 +89,7 @@ export default class BalanceBook extends Component<{}, State> {
 			<form
 				name='Transaction Form'
 				id='form'
-				onSubmit={this.onSubmitHandler}
+				onSubmit={event => this.onSubmitHandler(event)}
 			>
 				{this.state.formData.map(elt => {
 					if (elt.elementType === "submit") {
@@ -168,7 +169,7 @@ export default class BalanceBook extends Component<{}, State> {
 				})}
 			</form>
 		)
-		this.setState({ form: formarr })
+		this.setState({ form: form })
 		return form
 	}
 
