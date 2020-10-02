@@ -63,6 +63,10 @@ class Form extends React.Component<State> {
 						placeholder={this.state.elementConfig.placeholder}
 						name={this.state.elementConfig.name}
 						onChange={this.handleChange}
+						style={{
+							marginRight: "10px",
+							marginLeft: "10px",
+						}}
 					/>
 				)
 			case "number":
@@ -74,13 +78,30 @@ class Form extends React.Component<State> {
 						placeholder={this.state.elementConfig.placeholder}
 						name={this.state.elementConfig.name}
 						onChange={this.handleChange}
+						style={{
+							marginRight: "10px",
+							marginLeft: "10px",
+						}}
 					/>
 				)
 			case "select":
 				return (
 					<label>
-						Transaction Type
-						<select name={this.state.elementConfig.name} id='ttype'>
+						<span
+							style={{
+								fontWeight: "bold",
+								color: "rebeccapurple",
+							}}
+						>
+							Transaction Type
+						</span>
+						<select
+							name={this.state.elementConfig.name}
+							id='ttype'
+							style={{
+								margin: "0px 10px",
+							}}
+						>
 							<option label='+' value='+' id='add'>
 								+
 							</option>
@@ -93,13 +114,23 @@ class Form extends React.Component<State> {
 			case "date":
 				return (
 					<label>
-						Transaction Date
+						<span
+							style={{
+								fontWeight: "bold",
+								color: "rebeccapurple",
+							}}
+						>
+							Transaction Date
+						</span>
 						<input
 							id='tdate'
 							type={this.state.elementType}
 							name={this.state.elementConfig.name}
 							value={this.state.value}
 							onChange={this.handleChange}
+							style={{
+								margin: "0px 10px",
+							}}
 						/>
 					</label>
 				)
