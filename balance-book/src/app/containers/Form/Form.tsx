@@ -23,7 +23,12 @@ interface State {
 	changed: Function
 	value: number | string
 	elementType: string
-	elementConfig: elementConfig
+	elementConfig?:
+		| {
+				placehlder: string
+				name: string
+		  }
+		| { name: string }
 }
 
 class Form extends React.Component<State> {
