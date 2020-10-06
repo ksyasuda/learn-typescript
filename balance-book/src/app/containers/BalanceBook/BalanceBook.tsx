@@ -73,7 +73,7 @@ export default class BalanceBook extends Component<{}, State> {
 		form: null,
 	}
 
-	onSubmitHandler = (event) => {
+	onSubmitHandler = event => {
 		event.preventDefault()
 		console.log("submit!")
 		let name = document.getElementById("tname")
