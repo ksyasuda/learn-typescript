@@ -76,6 +76,10 @@ export default class BalanceBook extends Component<{}, State> {
 	onSubmitHandler = event => {
 		event.preventDefault()
 		console.log("submit!")
+		const target = event.target
+		for(let x of target) {
+			console.log(x.getAttribute('name'))
+		}
 		let name = document.getElementById("tname")
 		console.log("tname", name.getAttribute("value"))
 		let tempname = this.state.transactionName
@@ -116,56 +120,6 @@ export default class BalanceBook extends Component<{}, State> {
 					)
 					formarr.push(formm)
 					return formm
-					// switch (elt.elementType) {
-					// 	case "text":
-					// 		const name = (
-					// 			<Form
-					// 				key={elt.elementType}
-					// 				value={this.state.transactionName}
-					// 				changed={event => this.handleChange(event)}
-					// 			/>
-					// 		)
-					// 		formarr.push(name)
-					// 		return name
-					// 		break
-					// 	case "number":
-					// 		const num = (
-					// 			<Form
-					// 				key={elt.elementType}
-					// 				value={this.state.transactionAmount}
-					// 				changed={event => this.handleChange(event)}
-					// 			/>
-					// 		)
-					// 		formarr.push(num)
-					// 		return num
-					// 		break
-					// 	case "select":
-					// 		const type = (
-					// 			<Form
-					// 				key={elt.elementType}
-					// 				value={this.state.transactionAmount}
-					// 				changed={event => this.handleChange(event)}
-					// 			/>
-					// 		)
-					// 		formarr.push(type)
-					// 		return type
-					// 		break
-					// 	case "date":
-					// 		const date = (
-					// 			<Form
-					// 				key={elt.elementType}
-					// 				value={this.state.transactionAmount}
-					// 				changed={event => this.handleChange(event)}
-					// 			/>
-					// 		)
-					// 		formarr.push(date)
-					// 		return date
-					// 		break
-					// 	default:
-					// 		throw new Error(
-					// 			"Something went wrong with the names"
-					// 		)
-					// }
 				})}
 			</form>
 		)
