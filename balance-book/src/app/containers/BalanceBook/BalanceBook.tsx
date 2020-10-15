@@ -3,7 +3,7 @@ import Transaction from "../../components/Transaction/Transaction"
 import Form from "../Form/Form"
 import classes from "./BalanceBook.module.css"
 import transaction from "../../components/Transaction/Transaction"
-import axios from 'axios'
+import axios from "axios"
 
 type ElementConfig = {
 	elementType: string
@@ -25,6 +25,7 @@ interface State {
 	initialBalance: number
 	currentBalance: number
 	transactionAmount: number
+	transactions: Array<any>
 	transactionName: string
 	transactionType: string
 	transactionDate: string
@@ -37,6 +38,7 @@ export default class BalanceBook extends Component<{}, State> {
 		initialBalance: 7442.38,
 		currentBalance: 7442.38,
 		transactionAmount: 0,
+		transactions: [],
 		transactionName: "",
 		transactionType: "",
 		transactionDate: "",
@@ -83,37 +85,45 @@ export default class BalanceBook extends Component<{}, State> {
 		let tamount
 		let tdate
 		let ttype
-		for(let x of target) {
-			if(x.type === 'select-one') {
+		for (let x of target) {
+			if (x.type === "select-one") {
 				ttype = x.value
-			} else if(count == 0) {
+			} else if (count == 0) {
 				tname = x.value
-			} else if(count == 1) {
+			} else if (count == 1) {
 				tamount = x.value
-			} else if(count == 3) {
+			} else if (count == 3) {
 				tdate = x.value
 			}
 			++count
 		}
 		const data = {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
 			body: {
-				"transactionName": tname,
-				"transactionAmount": tamount,
-				"transactionType": ttype,
-				"transactionDate": tdate
-			}
+				transactionName: tname,
+				transactionAmount: tamount,
+				transactionType: ttype,
+				transactionDate: tdate,
+			},
 		}
-		console.log('data', data)
+		console.log("data", data)
 		try {
-			const res = await axios.post('http://localhost:3005/new-transaction', data)
-		 	console.log(res)
-			this.setState({ transactionName: '', transactionAmount: 0, transactionType:'', transactionDate: ''  })
+			const res = await axios.post(
+				"http://localhost:3005/new-transaction",
+				data
+			)
+			console.log(res)
+			this.setState({
+				transactionName: "",
+				transactionAmount: 0,
+				transactionType: "",
+				transactionDate: "",
+			})
 		} catch (err) {
-			console.error('something went wrong', err)
+			console.error("something went wrong", err)
 		}
 	}
 
@@ -154,13 +164,36 @@ export default class BalanceBook extends Component<{}, State> {
 			</form>
 		)
 		this.setState({ form: form })
-		return form
+		axios.get("http://localhost:3005/all-transactions").then((res: any) => {
+			const { data } = res.data
+			const transactions = [...this.state.transactions]
+			for (let item of data) {
+				console.log(item)
+				const {
+					transactionName,
+					transactionAmount,
+					transactionType,
+					transactionDate,
+				} = item
+				const temp = (
+					<Transaction
+						balance={this.state.currentBalance}
+						transactionName={transactionName}
+						transactionAmount={transactionAmount}
+						transactionType={transactionType}
+						transactionDate={transactionDate}
+					/>
+				)
+				transactions.push(temp)
+			}
+			this.setState({ transactions: transactions })
+		})
 	}
 
 	handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		// console.log('event', event.target);
 		// console.log(event.target.name)
-		// console.log(event.target.value)
+		//console..log(event.target.value)
 		switch (event.target.name) {
 			case "tname":
 				console.log("trans name")
