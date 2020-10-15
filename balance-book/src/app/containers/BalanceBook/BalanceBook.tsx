@@ -3,6 +3,7 @@ import Transaction from "../../components/Transaction/Transaction"
 import Form from "../Form/Form"
 import classes from "./BalanceBook.module.css"
 import transaction from "../../components/Transaction/Transaction"
+import axios from 'axios'
 
 type ElementConfig = {
 	elementType: string
@@ -73,18 +74,46 @@ export default class BalanceBook extends Component<{}, State> {
 		form: null,
 	}
 
-	onSubmitHandler = event => {
+	onSubmitHandler = async event => {
 		event.preventDefault()
 		console.log("submit!")
 		const target = event.target
+		let count = 0
+		let tname
+		let tamount
+		let tdate
+		let ttype
 		for(let x of target) {
-			console.log(x.getAttribute('name'))
+			if(x.type == 'select') {
+				console.log(x.selectedindex)
+				ttype = x.selectedindex
+			} else if(count == 0) {
+				tname = x.value
+			} else if(count == 1) {
+				tamount = x.value
+			} else if(count == 2) {
+				tdate = x.value
+			}
 		}
-		let name = document.getElementById("tname")
-		console.log("tname", name.getAttribute("value"))
-		let tempname = this.state.transactionName
-		tempname = ""
-		this.setState({ transactionName: tempname })
+		const data = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: {
+				transactionName: tname,
+				transactionAmount: tamount,
+				transactionType: ttype,
+				transactionDate: tdate
+			},
+		}
+		try {
+			const res = await axios.post('http://localhost:3005/new-transaction', data)
+		 	console.log(res)
+			this.setState({ transactionName: '', transactionAmount: 0, transactionType:'', transactionDate: ''  })
+		} catch (err) {
+			console.error('something went wrong', err)
+		}
 	}
 
 	componentDidMount = () => {
