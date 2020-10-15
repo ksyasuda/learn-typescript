@@ -84,16 +84,16 @@ export default class BalanceBook extends Component<{}, State> {
 		let tdate
 		let ttype
 		for(let x of target) {
-			if(x.type == 'select') {
-				console.log(x.selectedindex)
-				ttype = x.selectedindex
+			if(x.type === 'select-one') {
+				ttype = x.value
 			} else if(count == 0) {
 				tname = x.value
 			} else if(count == 1) {
 				tamount = x.value
-			} else if(count == 2) {
+			} else if(count == 3) {
 				tdate = x.value
 			}
+			++count
 		}
 		const data = {
 			method: 'POST',
@@ -101,12 +101,13 @@ export default class BalanceBook extends Component<{}, State> {
 				'Content-Type': 'application/json'
 			},
 			body: {
-				transactionName: tname,
-				transactionAmount: tamount,
-				transactionType: ttype,
-				transactionDate: tdate
-			},
+				"transactionName": tname,
+				"transactionAmount": tamount,
+				"transactionType": ttype,
+				"transactionDate": tdate
+			}
 		}
+		console.log('data', data)
 		try {
 			const res = await axios.post('http://localhost:3005/new-transaction', data)
 		 	console.log(res)
