@@ -9,8 +9,8 @@ interface Props {
 	transactionType: string
 }
 
-const transaction: React.FunctionComponent<Props> = props => {
-	let transChar, style
+const transaction: React.FunctionComponent<Props> = (props: Props) => {
+	let transChar: String, style: object
 	props.transactionType === "+" ? (transChar = "+") : (transChar = "-")
 	if (transChar === "+") {
 		style = {
@@ -21,17 +21,25 @@ const transaction: React.FunctionComponent<Props> = props => {
 			backgroundColor: "red",
 		}
 	}
+	const {
+		transactionName,
+		transactionAmount,
+		transactionType,
+		transactionDate,
+		balance,
+	} = props
+	const afterBalance: Number =
+		transactionType === "+"
+			? balance + transactionAmount
+			: balance - transactionAmount
 	return (
 		<div className={classes.Container} style={style}>
 			<p className={classes.TName}>
-				<span className={classes.TNameText}>
-					{props.transactionName}
-				</span>{" "}
-				on {props.transactionDate}
+				<span className={classes.TNameText}>{transactionName}</span> on{" "}
+				{transactionDate}
 			</p>
 			<p className={classes.TAmount}>
-				${props.balance} {transChar} ${props.transactionAmount} = $
-				{props.balance - props.transactionAmount}
+				${balance} {transChar} ${transactionAmount} = ${afterBalance}
 			</p>
 		</div>
 	)

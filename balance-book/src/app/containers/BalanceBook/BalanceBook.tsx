@@ -116,6 +116,16 @@ export default class BalanceBook extends Component<{}, State> {
 				data
 			)
 			console.log(res)
+			let inc: number = 0
+			if (ttype === "+") {
+				this.setState({
+					currentBalance: this.state.currentBalance + tamount,
+				})
+			} else if (ttype === "-") {
+				this.setState({
+					currentBalance: this.state.currentBalance - tamount,
+				})
+			}
 			this.setState({
 				transactionName: "",
 				transactionAmount: 0,
@@ -133,6 +143,7 @@ export default class BalanceBook extends Component<{}, State> {
 			<form
 				name='Transaction Form'
 				id='form'
+				className={classes.FormCont}
 				onSubmit={event => this.onSubmitHandler(event)}
 			>
 				{this.state.formData.map(elt => {
@@ -164,11 +175,16 @@ export default class BalanceBook extends Component<{}, State> {
 			</form>
 		)
 		this.setState({ form: form })
+		let diff: number = 0.0
 		axios.get("http://localhost:3005/all-transactions").then((res: any) => {
 			const { data } = res.data
 			const transactions = [...this.state.transactions]
 			for (let item of data) {
 				console.log(item)
+				diff = 0.0
+				item.transactionType === "+"
+					? (diff += item.transactionAmount)
+					: (diff -= item.transactionAmount)
 				const {
 					transactionName,
 					transactionAmount,
@@ -177,6 +193,7 @@ export default class BalanceBook extends Component<{}, State> {
 				} = item
 				const temp = (
 					<Transaction
+						key={this.state.currentBalance + transactionDate}
 						balance={this.state.currentBalance}
 						transactionName={transactionName}
 						transactionAmount={transactionAmount}
@@ -184,6 +201,11 @@ export default class BalanceBook extends Component<{}, State> {
 						transactionDate={transactionDate}
 					/>
 				)
+				this.setState(prevState => {
+					return {
+						currentBalance: prevState.currentBalance + diff,
+					}
+				})
 				transactions.push(temp)
 			}
 			this.setState({ transactions: transactions })
@@ -223,24 +245,10 @@ export default class BalanceBook extends Component<{}, State> {
 					Current Balance: {this.state.currentBalance}
 				</p>
 				{this.state.form}
-				{/* <Form
-					changed={this.handleChange}
-					value={this.state.transactionName}
-				/> */}
-				{/* <Transaction
-						balance={this.state.currentBalance}
-						transactionAmount={20.5}
-						transactionName='Test'
-						transactionType='-'
-						transactionDate='September 29, 2020'
-					/>
-					<Transaction
-						balance={this.state.currentBalance}
-						transactionAmount={20.5}
-						transactionName='Test2'
-						transactionType='+'
-						transactionDate='September 29, 2020'
-					/> */}
+				<div className={classes.AllTransactionsContainer}>
+					All Transactions
+				</div>
+				{this.state.transactions}
 			</div>
 		)
 	}

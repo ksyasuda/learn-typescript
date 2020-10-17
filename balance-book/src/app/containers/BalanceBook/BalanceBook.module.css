@@ -10,3 +10,20 @@
 	color: green;
 	font-size: 18px;
 }
+
+.FormCont {
+	display: flex;
+	justify-content: center;
+	padding: 5px;
+	margin: 3% 0;
+}
+
+.AllTransactionsContainer {
+	text-align: center;
+	display: flex;
+	font-weight: bold;
+	color: dodgerblue;
+	justify-content: center;
+	padding: 8px;
+	margin-bottom: 5px;
+}
