@@ -33,7 +33,7 @@ interface State {
 	form: any
 }
 
-export default class BalanceBook extends Component<{}, State> {
+export default class BalanceBook extends React.Component<{}, State> {
 	state: State = {
 		initialBalance: 7442.38,
 		currentBalance: 7442.38,
